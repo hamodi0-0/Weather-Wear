@@ -10,13 +10,23 @@
 </head>
 <body>
 
+    <% if (locals.data){  %>
+        
+        <h1><%= parseInt(data.main.temp) %>°C</h1>
+        <h2><%= data.weather[0].description %></h2>
+        <a href="/">
+            <button>Home</button>
+        </a>
+        <%} else {%>
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <form class="" action="/" method="post">
-        <input class="" type="text" name="city" placeholder="Enter your location" required>
-        <button class="btn btn-dark btn-lg" type="submit">Submit</button>
+        <input class="" type="text" name="city" placeholder="Enter your City" required>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
     </div>
-    
+            
+    <%}%>
+
     
 
 

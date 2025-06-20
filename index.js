@@ -16,11 +16,11 @@ app.get('/', (req, res)=>{
 app.post('/', async (req, res)=>{
     const {city} = req.body;
     
-    const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${apiKey}`)
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`)
 
     const result = response.data
-    
-    
+    console.log(result);
+    res.render('index.ejs', {data : result})    
 })
 
 
