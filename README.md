@@ -2,7 +2,7 @@
 
 ---
 
-Weather Wear is a simple web app used to give you suggestions on what to wear according to your real-time weather
+Weather Wear is a minimal web app used to give you suggestions on what to wear according to your real-time weather
 
 ## Guide
 
