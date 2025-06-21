@@ -1,12 +1,12 @@
-export const winterSuggestions = [
-"How about going with a warm wool coat?",
-"Why not try layering with a thermal shirt?",
-"You could go with a cozy sweater today.",
-"Consider wearing a puffer jacket to stay warm.",
-"A hoodie might be perfect for this chilly weather.",
-"What about throwing on a scarf and beanie?",
-"Try adding some gloves to keep your hands warm.",
-"How about wearing some insulated boots?",
-"Think about layering with a fleece jacket.",
-"A down vest could be a great lightweight option."
-];
+export const summerSuggestions = [
+    "How about going with shorts?",
+    "Why not try a tank top today?",
+    "You could go with a light linen shirt.",
+    "Consider wearing a pair of swim trunks.",
+    "A simple T-shirt might be perfect for the heat.",
+    "What about a sleeveless shirt for a breezy feel?",
+    "Try some chino shorts for a casual look.",
+    "How about pairing a polo shirt with sandals?",
+    "A sun hat could really complete the outfit.",
+    "Think about throwing on a pair of flip-flops."
+  ];

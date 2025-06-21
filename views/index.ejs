@@ -3,54 +3,110 @@
 
 <body>
 
+        <!-- if there is data sent over generate weather information -->
+
     <% if (locals.data){  %>
-        
-        <div class=" p-4 align-content-center justify-content-center rounded-3 min-vh-100" style="background-color: cornflowerblue;">
+    
+        <div class=" p-5 align-content-center justify-content-center rounded-3 min-vh-100" style="background-color: cornflowerblue;">
             
-            <div class="row py-5 mx-auto w-50 align-content-center justify-content-center justify-content-evenly rounded-5 bg-light">
+            <div class="row py-3 mx-auto w-50 align-content-center justify-content-center justify-content-evenly rounded-5 bg-light">
                 <div class="mb-5 text-center">
                     <form class="" action="/" method="post">
-                        <input class="form-control-lg rounded-5"  type="text" name="city" placeholder="Enter your City" required>
+                        <input class="form-control-lg rounded-5 border border-dark"  type="text" name="city" placeholder="Enter your City" required>
                         <button class="btn btn-dark btn-lg rounded-circle m-2" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
                                 viewBox="0 0 16 16">
                                 <path
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                             </svg>
-                        </button>
-                        
-                        </form>
+                        </button>  
+                    </form>
                 </div>
                     <div class="col-4 p-3 align-content-center">
-                        <h1 class="display-4 fw-bold lh-1 text-body-emphasis"><%= data.weather[0].description %></h1>
+
+                        <!-- adding description  -->
+
+                        <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+                            <%= data.weather[0].description %>
+                        </h1>
                     </div>
 
+                    <!-- checking for appropriate image  -->
+
+                    <% let source; %>
+                    <% if (data.weather[0].main==='Clear' ){ %>
+                        <% source = "/images/sunny.png"  %>
+                         <% } %>
+                        <% if (data.weather[0].main==='Rain' ){%>
+                            <% source="/images/rain.png" %>
+                        <% } %>
+                        <% if (data.weather[0].main==='Snow' ){%>
+                            <% source="/images/snow.png" %>
+                       <% } %>
+                        <% if (data.weather[0].main==='Clouds' ){%>
+                            <% source="/images/cloudy.png" %>
+                         <% } %>
+                        <% if (data.weather[0].main==='Haze' ){%>
+                            <% source="/images/fog.png" %>
+                          <% } %>
                     <div class="col-4 p-3"> 
-                        <img class="rounded-lg-3" src="/images/sunny.png" width="250">
+                        <img class="rounded-lg-3" src= <%= source %> width="250">
                     </div>
 
-                    <div class="d-flex justify-content-evenly align-content-center">
+                        <!-- adding temprature and wind speed -->
+
+                    <div class="d-flex justify-content-evenly align-content-center mb-3">
+                       
                         <div>
-                            <p class="fs-1">25</p>
+                            <p class="fs-1 fw-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40   " fill="currentColor" class="bi bi-thermometer-high" style="color: rgb(201, 24, 24);"
+                                    viewBox="0 0 16 16">
+                                    <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V2.5a.5.5 0 0 1 1 0v8.585a1.5 1.5 0 0 1 1 1.415" />
+                                    <path
+                                        d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1" />
+                                </svg>
+                                <%= Math.floor(data.main.temp)%>°C
+                            </p>
                         </div>
                         <div>
-                            <p class="fs-1">5km/h</p>
+                            <p class="fs-1 fw-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-wind" style="color: lightblue;"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5" />
+                                </svg>
+                                <%= Math.floor(data.wind.speed) %>Km/h
+                            </p>
                         </div>
                         
                     </div>
 
-                    <div class="text-center fs-2 my-3">You could go with a sweater!
+                    <hr>
+
+                    <!-- generate a random clothing suggestion from summer spring and winter arrays, based on temprature -->
+
+                        <% let {temp} = data.main %>
+                    <div class="text-center fs-3 fw-bold my-3">
+                        <% if (temp >= 25) {%>
+                            <%= summer[Math.floor(Math.random()*10)] %>
+                            <% } %>        
+                        <% if (temp < 25 && temp >= 20) {%>
+                            <%= spring[Math.floor(Math.random()*10)] %>
+                            <% } %>
+                        <% if (temp < 20) {%>
+                            <%= winter[Math.floor(Math.random()*10)] %>
+                            <% } %>
                     </div>
-                    <div class="text-center">
-                        <button type="button" class="btn btn-dark rounded-5 btn-lg px-4 me-md-2 fw-bold my-3">Try another
-                        </button> 
-                    </div>
+
+                    <hr>
         
                 </div>
 
         </div>
 
-        <%} else {%>
+        <!-- if there is no data sent over show homme page -->
+
+        <% } else {%>
             <div class="align-content-center justify-content-center min-vh-100" style="background-color: cornflowerblue;">
             
                 <div class="row mx-auto w-50 rounded-pill bg-light">
@@ -58,7 +114,7 @@
                     <div class="text-center py-5">
 
                         <form class="" action="/" method="post">
-                            <input class="form-control-lg rounded-5 mx-5" type="text" name="city" placeholder="Enter your City"
+                            <input class="form-control-lg rounded-5 mx-5 border border-dark" type="text" name="city" placeholder="Enter your City"
                                 required>
                             <button class="btn btn-dark btn-lg rounded-circle" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -74,7 +130,7 @@
                 </div>
             
             </div>
-            
+ 
     <%}%>
 
     
