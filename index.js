@@ -5,7 +5,6 @@ import bodyParser from 'body-parser'
 
 const app = express();
 const PORT = 3000;
-const apiKey = '0af651eec33d3363ff66165763d40efa'
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'))
