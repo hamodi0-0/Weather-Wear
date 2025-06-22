@@ -13,7 +13,7 @@ const apiKey = process.env.API_KEY;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('./public'))
+    app.use(express.static('./public'))
 
 app.get('/', (req, res)=>{
     res.render('index.ejs')
@@ -45,3 +45,5 @@ app.post('/', async (req, res)=>{
 app.listen(PORT, ()=>{
     console.log(`Server is running on port: ${PORT}`);
 })
+
+//meow
